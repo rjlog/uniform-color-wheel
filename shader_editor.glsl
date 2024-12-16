@@ -7,7 +7,7 @@ out vec4 COLOR;
 const float RADIUS = 0.5;
 const float TAU = 6.283185307179;
 const float PI = 3.141592653589;
-const float HUES[1000] = float[]();
+uniform sampler2D hues;
 
 uniform vec2 resolution;
 
@@ -136,7 +136,7 @@ vec3 get_color(vec2 pos, float distance_center) {
 	float saturation = -0.553 * cos(0.8 * PI * distance_center) + 0.553;
 	float value = 1.0;
 	float hue = atan(pos.x, pos.y) / TAU + 0.5;
-	hue = HUES[int(1000.0 * hue)];
+	hue = texture(hues, vec2(hue,0.0));
 
 	return get_rgb(hue, saturation, value);
 }
