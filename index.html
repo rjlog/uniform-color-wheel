@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>WebGL Demo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://greggman.github.io/webgl-lint/webgl-lint.js"></script>
+  <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+          integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+          crossorigin="anonymous"
+          defer></script>
+  <script id="vertex-shader-2d" type="notjs">
+    attribute vec2 position;
+
+    void main() {
+      gl_Position = vec4(position * 2.0 - 1.0, 0, 1.0);
+    }
+
+  </script>
+
+  <script id="fragment-shader-2d" type="notjs">
+
+    // mediump is a good default
+    precision mediump float;
+
+    const float TAU = 6.28318530717958647692;
+    uniform vec2 resolution;
+
+    vec3 hsv_to_rgb(float hue, float saturation, float value) {
+      float chroma = saturation * value;
+      float min_rgb = value - chroma;
+      float r = clamp(abs(chroma * 6.0 * hue - 3.0 * chroma) - 1.0 * chroma, 0.0, chroma);
+      float g = clamp(-abs(chroma * 6.0 * hue - 2.0 * chroma) + 2.0 * chroma, 0.0, chroma);
+      float b = clamp(-abs(chroma * 6.0 * hue - 4.0 * chroma) + 2.0 * chroma, 0.0, chroma);
+      return vec3(min_rgb + r, min_rgb + g, min_rgb + b);
+    }
+
+    void main() {
+      vec2 uv = vec2(1.0,-1.0) * (0.5 - gl_FragCoord.xy / resolution);
+      float distance_center = length(uv);
+      float radius = 0.5;
+      if (distance_center <= radius)
+	  {
+        float alpha = clamp((radius - distance_center) * resolution.y * 0.5, 0.0, 1.0);
+        float saturation = -0.553 * cos(0.8 * TAU * distance_center) + 0.553;
+        gl_FragColor = vec4(hsv_to_rgb(atan(uv.y, uv.x) / TAU + 0.5, saturation, 1.0), alpha);
+      }
+    }
+  </script>
+
+  <script src="main.js" type="module"></script>
+</head>
+
+<body>
+  <canvas id="gl-canvas" width="250" height="250"></canvas>
+</body>
+</html>
