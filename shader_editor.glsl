@@ -141,7 +141,7 @@ vec3 get_color(vec2 pos, float distance_center) {
 	return get_rgb(hue, saturation, value);
 }
 
-void main() {
+void colorWheel() {
     vec2 uv = vec2(1.0,-1.0) * (0.5 - gl_FragCoord.xy / resolution);
     float distance_center = length(uv);
     if (distance_center <= RADIUS)

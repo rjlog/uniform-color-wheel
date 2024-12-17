@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>WebGL Demo</title>
+  <title>Color Picker</title>
+  <link rel="icon" href="icon.png" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
   <script src="https://greggman.github.io/webgl-lint/webgl-lint.js"></script>
   <script
           src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
           integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
           crossorigin="anonymous"
-          defer></script>
-
-  <script src="main.js" type="module"></script>
-</head>
-
-<body>
-  <canvas id="copy" width="250" height="250"></canvas>
+          defer></script> <!--matrix library-->
+  <script src="color-wheel.js" type="module"></script>
+  <canvas id="color_wheel" width="250" height="250"></canvas>
 </body>
 </html>

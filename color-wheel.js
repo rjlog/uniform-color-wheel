@@ -1,5 +1,5 @@
 const glCanvas = document.createElement('canvas');
-const canvas = document.querySelector('#copy');
+const canvas = document.querySelector('#color_wheel');
 const canvasHeight = canvas.clientHeight;
 const canvasWidth = canvas.clientWidth;
 const gl = glCanvas.getContext('webgl2', { antialias: false });
@@ -161,9 +161,9 @@ void main() {
 }
 `;
 
-main();
+colorWheel();
 
-function main() {
+function colorWheel() {
   if (!gl) {
     alert('Unable to initialize WebGL. Your browser or machine may not support it.');
     return;
