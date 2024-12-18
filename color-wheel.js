@@ -1,24 +1,38 @@
+export const colorWheelCanvas = document.querySelector('#color-wheel');
+export const canvasSize = colorWheelCanvas.clientWidth;
+export const radius = 0.45
 const glCanvas = document.createElement('canvas');
-const canvas = document.querySelector('#color_wheel');
-const canvasHeight = canvas.clientHeight;
-const canvasWidth = canvas.clientWidth;
 const gl = glCanvas.getContext('webgl2', { antialias: false });
-const vertexShaderSource = `#version 300 es
+
+main();
+function main() {
+  if (!gl) {
+    alert('Unable to initialize WebGL. Your browser or machine may not support it.');
+    return;
+  }
+  
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  const alignment = 1;
+  gl.pixelStorei(gl.UNPACK_ALIGNMENT, alignment);
+
+  const vertexShaderSource = `#version 300 es
 in vec2 position;
 void main() {
   gl_Position = vec4(position * 2.0 - 1.0, 0, 1.0);
 }
 `;
-const fragmentShaderSource = `#version 300 es
+  const fragmentShaderSource = `#version 300 es
 // mediump is a good default
 precision mediump float;
 
 out vec4 COLOR;
 
-const float RADIUS = 0.5;
-const float TAU = 6.283185307179;
-uniform sampler2D hues;
+const float RADIUS = ${radius};
+const float TAU = ${Math.PI * 2};
+const float PI = ${Math.PI};
 
+uniform sampler2D hues;
 uniform vec2 resolution;
 
 
@@ -143,9 +157,9 @@ vec3 get_rgb(float hue, float saturation, float value) {
 
 vec3 get_color(vec2 pos, float distance_center) {
 	// Linear at the edges, more white in the center, gradual change
-	float saturation = -0.553 * cos(0.8 * TAU * distance_center) + 0.553;
+	float saturation = -0.553 * cos(0.8 * PI * distance_center / RADIUS) + 0.553;
 	float value = 1.0;
-	float hue = atan(pos.y, pos.x) / TAU + 0.5;
+	float hue = atan(-pos.y, pos.x) / TAU + 0.5;
     hue = texture(hues, vec2(hue,0.0)).r;
 	return get_rgb(hue, saturation, value);
 }
@@ -160,19 +174,6 @@ void main() {
     }
 }
 `;
-
-colorWheel();
-
-function colorWheel() {
-  if (!gl) {
-    alert('Unable to initialize WebGL. Your browser or machine may not support it.');
-    return;
-  }
-  
-  gl.enable(gl.BLEND);
-  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-  const alignment = 1;
-  gl.pixelStorei(gl.UNPACK_ALIGNMENT, alignment);
   
   const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
   const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
@@ -193,8 +194,8 @@ function colorWheel() {
 }
 
 function drawScene(resolutionUniformLocation) {
-  glCanvas.width = Math.floor(canvasWidth * window.devicePixelRatio);
-  glCanvas.height = glCanvas.width.valueOf();
+  glCanvas.width = 
+      glCanvas.height = Math.floor(canvasSize * window.devicePixelRatio);
   gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
   gl.uniform2f(resolutionUniformLocation, glCanvas.width, glCanvas.height);
   const primitiveType = gl.TRIANGLES;
@@ -230,17 +231,15 @@ function setPositions(program) {
 function toImage(width, height) {
   const pixels = new Uint8Array(width * height * 4); // 4 bytes per pixel (RGBA)
   gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
+  colorWheelCanvas.width = width;
+  colorWheelCanvas.height = height;
+  const ctx = colorWheelCanvas.getContext('2d');
   const imageData = new ImageData(new Uint8ClampedArray(pixels), width, height);
   ctx.putImageData(imageData, 0, 0);
-  // gl origin is bottom left
-  ctx.scale(1, -1);
-  ctx.drawImage(canvas, 0, height * -1);
+  // Here it is not accounted for that the gl origin is in the bottom left. This is done inside the shader.
   // rescale
-  canvas.style.width = canvasWidth + 'px';
-  canvas.style.height = canvasHeight + 'px';
+  colorWheelCanvas.style.width = 
+      colorWheelCanvas.style.width = canvasSize + 'px';
 }
 
 function setHues(program) {
