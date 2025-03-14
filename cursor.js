@@ -1,12 +1,5 @@
-/**
- * TODO: keyboard support for accessibility
- * TODO: hsv and rgb slider values -> rgb values:
- * 
- * function to get the hue and saturation from rgb values to update the cursor
- *
- * rgb point -> oklab -> okhue -> 1D lookup table -> normalised hue
- *
- */
+// TODO: keyboard support for accessibility
+// TODO: convert to python and make test functions
 
 import {colorWheelCanvas, canvasSize, radius, uniformHues} from "./color-wheel.js";
 
@@ -92,7 +85,6 @@ function move(clientX, clientY) {
         x = centerX - dx / distance * radiusWheel;
         y = centerY - dy / distance * radiusWheel;
     }
-    console.log(x)
     cursor.style.left = x + 'px';
     cursor.style.top = y + 'px';
 }
@@ -192,7 +184,8 @@ const indices = [
     0.393, 0.392, 0.392, 0.391, 0.391, 0.39, 0.39, 0.389, 0.388, 0.388,
 ];
 
-function srgbToLab(rgb) {
+function srgbToLab(red, green, blue) {
+    const rgb = [red, green, blue];
     const mask = rgb.map((value) => value <= 0.04045);
 
     const linearRgb = rgb.map((value, i) =>
@@ -210,8 +203,8 @@ function srgbToLab(rgb) {
     return { lightness, a, b };
 }
 
-export function updateCursor(rgb) {
-    const { lightness, a, b } = srgbToLab(rgb);
+export function updateCursor(red, green, blue) {
+    const { lightness, a, b } = srgbToLab(red, green, blue);
     const hue = 0.5 + 0.5 * Math.atan2(-b, a) / Math.PI;
     const turn = indices[Math.round(hue * indices.length)];
     const uniformHue = uniformHues[Math.round(turn * uniformHues.length)];
@@ -227,7 +220,8 @@ export function updateCursor(rgb) {
     const chroma = Math.sqrt(a * a + b * b);
     const t = T / (chroma + lightness * T);
     const C_v = t * chroma;
-    const saturation = (S_0 + T) * C_v / ((T * S_0) + T * k * C_v);
+    let saturation = (S_0 + T) * C_v / ((T * S_0) + T * k * C_v);
+    saturation = Math.min(saturation, 1)
     const distance =  Math.acos(1 - saturation / 0.553) / 0.8 / Math.PI;
     const radians = turn * 2 * Math.PI;
     const radiusWheel = radius * canvasSize;

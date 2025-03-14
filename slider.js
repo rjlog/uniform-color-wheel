@@ -7,5 +7,10 @@ const sliders = {
     blue: document.querySelector("#slider-blue")
 };
 
+function updateSliders() {
+    // hsv to rgb f
+    
+}
+
 Object.values(sliders).forEach(slider => slider.addEventListener("input", function() {
-    updateCursor(Object.values(sliders).map(slider => slider.value / 255))}));
+    updateCursor(...Object.values(sliders).map(slider => slider.value / 255))}));
