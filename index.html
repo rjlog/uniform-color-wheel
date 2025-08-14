@@ -1,13 +1,12 @@
 <!--TODO:
 Show selected color
-RGB sliders
 HSV sliders
 color info
 Color harmonies shown directly on the color wheel
 
 -->
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>Color Picker</title>
@@ -16,16 +15,6 @@ Color harmonies shown directly on the color wheel
 </head>
 
 <body>
-  <script src="https://greggman.github.io/webgl-lint/webgl-lint.js"></script>
-  <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
-          integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
-          crossorigin="anonymous"
-          defer></script> <!--matrix library-->
-  <script src="color-wheel.js" type="module"></script>
-  <script src="cursor.js" type="module"></script>
-  <script src="slider.js" type="module"></script>
-  <script src="https://cdn.jsdelivr.net/pyodide/v0.27.3/full/pyodide.js"></script>
   <div class="container">
     <div id="color-wheel-container">
       <canvas id="color-wheel"></canvas>
@@ -33,20 +22,36 @@ Color harmonies shown directly on the color wheel
     </div>
 
     <div class="sliders">
-      <div class="slider">
-        <label for="slider-red">r</label>
-        <input type="range" id="slider-red" min="0" max="255" value="255">
+      <div class="slider-container">
+        <input type="range" id="slider-red"
+               style="--slider-color: #00ffff;"
+               min="0" max="255" value="255"
+               class="slider">
       </div>
-      <div class="slider">
-        <label for="slider-green">g</label>
-        <input type="range" id="slider-green" min="0" max="255" value="255">
+      <div class="slider-container">
+        <input type="range" id="slider-green"
+               style="--slider-color: #ff00ff;"
+               min="0" max="255" value="255"
+               class="slider">
       </div>
-      <div class="slider">
-        <label for="slider-blue">b</label>
-        <input type="range" id="slider-blue" min="0" max="255" value="255">
+      <div class="slider-container">
+        <input type="range" id="slider-blue"
+               style="--slider-color: #ffff00;"
+               min="0" max="255" value="255" class="slider">
       </div>
     </div>
   </div>
 
+  <script src="https://greggman.github.io/webgl-lint/webgl-lint.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+    integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+    crossorigin="anonymous"
+    defer></script> <!--matrix library-->
+  <script src="scripts/color-wheel.js" type="module"></script>
+  <script src="scripts/cursor.js" type="module"></script>
+  <script src="scripts/slider.js" type="module"></script>
+  <script src="scripts/color.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.27.3/full/pyodide.js"></script>
 </body>
 </html>

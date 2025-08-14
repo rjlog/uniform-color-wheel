@@ -1,5 +1,9 @@
+:root {
+    --slider-color: white;
+}
+
 body {
-    background: #539EC1;
+    background: #ebebeb;
 }
 
 #color-wheel-container {
@@ -36,6 +40,11 @@ body {
     margin: 20px;
 }
 
+.slider-container {
+    width: 100%;
+    max-width: 500px;
+}
+
 .sliders {
     display: flex;
     flex-direction: column;
@@ -43,9 +52,36 @@ body {
 }
 
 .slider {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 20px; /* Rectangular slider height */
+    background: linear-gradient(to right, var(--slider-color), white);
+    border-radius: 5px;
+    outline: none;
+    transition: opacity .2s;
+}
+
+/* Thumb for WebKit browsers (Chrome, Safari, Edge) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    background: transparent;
+    border: 1px solid #000000; /* Black outline */
+    border-radius: 50%; /* Make it a circle */
+    cursor: pointer;
+}
+
+/* Thumb for Firefox */
+.slider::-moz-range-thumb {
+    width: 10px;
+    height: 25px;
+    background: transparent;
+    border: 1px solid black;
+    outline: 1px solid white;
+    border-radius: 10%;
+    cursor: pointer;
 }
 
 input[type="range"] {
