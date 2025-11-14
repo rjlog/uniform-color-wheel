@@ -23,8 +23,8 @@ body {
 }
 
 #hex-display {
-    font-family: "JetBrains Mono", sans-serif;
-    font-size: 3rem;
+    font-family: "Rubik", sans-serif; /* Use mono font like inputs */
+    font-size: 3rem; /* Large text */
     font-weight: 500;
     color: #333;
 }
