@@ -7,10 +7,6 @@
     --slider-height: 20px;
 }
 
-.rubik-font {
-            font-family: "Rubik", sans-serif;
-        }
-
 body {
     background-color: whitesmoke;
     font-family: "Rubik", "sans-serif";
@@ -22,11 +18,23 @@ body {
 
 }
 
+#hex-container {
+    background: #ffffff;
+    box-shadow: 0 0 1em lightgray;
+    height: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 1em;
+    transition: background-color 0.5s ease;
+    margin: 2rem;
+}
+
 #hex-display {
-    font-family: "Rubik", sans-serif; /* Use mono font like inputs */
-    font-size: 3rem; /* Large text */
-    font-weight: 500;
+    font-family: "Jetbrain Mono", monospace; /* Use mono font like inputs */
+    font-size: 3rem;
     color: #333;
+    text-align: center;
+    line-height: 1rem;
 }
 
 #interface {
@@ -87,8 +95,8 @@ label {
 .slider {
     -webkit-appearance: none;
     width: 100%;
-    height: var(--slider-height); /* Rectangular slider height */
-    background: linear-gradient(to right, black, var(--slider-color));
+    height: var(--slider-height);
+    background: linear-gradient(to left, #ffffff, var(--slider-color));
     border-radius: 3px;
     z-index: 1;
 }
@@ -115,7 +123,7 @@ label {
 }
 
 .number-input {
-    font-family: "JetBrains Mono", sans-serif;
+    font-family: "Jetbrain Mono", monospace;
     width: 4em;
     padding: 0.3em;
     border: 1px solid lightgray;

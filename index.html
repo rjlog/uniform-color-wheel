@@ -12,12 +12,15 @@ Color harmonies shown directly on the color wheel
   <link rel="icon" href="icon.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <h1 id="hex-display">#000000</h1>
+  <div id="hex-container">
+    <h1 id="hex-display">#ffffff</h1>
+  </div>
   <div id="interface">
     <div id="color-wheel-container">
       <canvas id="color-wheel"></canvas>
@@ -27,39 +30,39 @@ Color harmonies shown directly on the color wheel
     <div class="sliders">
       <div class="slider-group">
         <label for="slider-red">R</label><input type="range" id="slider-red"
-                                                style="--slider-color: #f00;"
-                                                min="0" max="255" value="0"
+                                                style="--slider-color: #00ffff;"
+                                                min="0" max="255" value="255"
                                                 autocomplete="off"
                                                 class="slider">
-        <input type="number" id="red-input" class="number-input" min="0" max="255" value="0" aria-label="red">
+        <input type="number" id="red-input" class="number-input" min="0" max="255" value="255" aria-label="red">
       </div>
       <div class="slider-group">
         <label for="slider-green">G</label><input type="range" id="slider-green"
-                                                  style="--slider-color: #0f0;"
-                                                  min="0" max="255" value="0"
+                                                  style="--slider-color: #ff00ff;"
+                                                  min="0" max="255" value="255"
                                                   autocomplete="off"
                                                   class="slider">
-        <input type="number" id="green-input" class="number-input" min="0" max="255" value="0" aria-label="green">
+        <input type="number" id="green-input" class="number-input" min="0" max="255" value="255" aria-label="green">
       </div>
       <div class="slider-group">
         <label for="slider-blue">B</label><input type="range" id="slider-blue"
-                                                 style="--slider-color: #00f;"
-                                                 min="0" max="255" value="0"
+                                                 style="--slider-color: #ffff00;"
+                                                 min="0" max="255" value="255"
                                                  autocomplete="off"
                                                  class="slider">
-        <input type="number" id="blue-input" class="number-input" min="0" max="255" value="0" aria-label="blue">
+        <input type="number" id="blue-input" class="number-input" min="0" max="255" value="255" aria-label="blue">
       </div>
       <div class="slider-group">
         <label for="value-slider">☀️</label>
         <div class="slider-wrapper">
           <input type="range" id="value-slider"
                  style="--slider-color: #fff;"
-                 min="0" max="255" value="0"
+                 min="0" max="255" value="255"
                  autocomplete="off"
                  class="slider">
           <canvas id="value-slider-bg-canvas"></canvas>
         </div>
-        <input type="number" id="value-input" class="number-input" min="0" max="255" value="0" aria-label="value">
+        <input type="number" id="value-input" class="number-input" min="0" max="255" value="255" aria-label="value">
       </div>
     </div>
   </div>
