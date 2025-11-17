@@ -266,11 +266,12 @@ function toImage(width, height) {
   colorWheelCanvas.style.width = 
       colorWheelCanvas.style.width = canvasSize + 'px';
   const img = document.createElement('img');
+  img.draggable = false
   img.src = colorWheelCanvas.toDataURL();
   img.style.width = canvasSize + 'px';
+  img.id = 'color-wheel';
   img.alt = "color wheel";
   colorWheelCanvas.replaceWith(img);
-
 }
 
 function createProgram(gl, vertexShader, fragmentShader) {
