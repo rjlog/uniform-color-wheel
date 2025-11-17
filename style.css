@@ -2,9 +2,17 @@
     --slider-color: white;
 
     --thumb-width: 0.4em;
-    --thumb-height: 105%;
+    --thumb-height: 23px;
     --thumb-border-radius: 1px;
     --slider-height: 20px;
+}
+
+a {
+    color: #0076ff;
+    text-decoration: none;
+}
+a:hover {
+    color: #0054ba;
 }
 
 body {
@@ -111,7 +119,9 @@ label {
 
 
 .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
     appearance: none;
+    box-sizing: border-box;
     width: var(--thumb-width);
     height: var(--thumb-height);
     background: transparent;
@@ -138,8 +148,6 @@ label {
     text-align: right;
 }
 
-
-
 .slider-wrapper {
     display: flex;
     align-items: center;
@@ -163,7 +171,7 @@ label {
     background: none;
 }
 
-/* The generic formula display */
+
 .formula-box {
     color: #333;
     text-align: center;
@@ -175,7 +183,6 @@ label {
     font-family: 'Times New Roman', Times, serif;
 }
 
-/* Table styling */
 .coef-table {
     width: 100%;
     border-collapse: collapse;

@@ -70,15 +70,15 @@ Color harmonies shown directly on the color wheel
   <div id="content-text">
     <h3>What is this?</h3>
     <p>
-      I designed a color picker to see if I could improve on existing color pickers. It is for now more meant as a showcase; it does not have extensive features, and it is not without its flaws.
+      I designed a color picker to see if I could improve on existing color pickers. The current version is more meant as a showcase; it does not have extensive features, and it is not without its flaws.
     </p>
 
     <h3>Motivation</h3>
     <p>
-      HSV is the most common color model used for color pickers. It utilizes three parameters: Hue, Saturation, and Value (or Brightness). However, HSV relies on a simplistic design that fails to account for human color perception. To improve this, a color picker is designed using a perceptually uniform color space.
+      HSV is the most common color model used for color pickers. It utilizes three parameters: Hue, Saturation, and Value (or Brightness). However, HSV relies on a simplistic design that fails to account for human color perception. To improve this, a <a href="https://en.wikipedia.org/wiki/Color_appearance_model">perceptually uniform color space</a> can be used.
     </p>
     <p>
-      Oklab is a perceptually uniform color space widely used for its simplicity in converting to and from sRGB. Its creator, Björn Ottoson, adapted this space to improve upon HSV, resulting in a model dubbed “Okhsv”.
+      <a href="https://en.wikipedia.org/wiki/Oklab_color_space">Oklab</a> is a perceptually uniform color space widely used for its simplicity in converting to and from standard RGB values. Its creator, Björn Ottoson, adapted this space to improve upon HSV, resulting in the <a href="https://bottosson.github.io/posts/colorpicker/">Okhsv</a> model.
     </p>
     <p>
       While Okhsv has advantages over standard HSV, it has a flaw: it does not vary evenly when changing parameters. Because it inherits hue directly from Oklab, lightness and chroma can change rapidly when comparing adjacent hues at constant saturation and value.
@@ -87,7 +87,7 @@ Color harmonies shown directly on the color wheel
       To address this, the hues in this color picker have been redistributed. While maintaining the saturation and value calculations of Okhsv, the hue spacing has been adjusted so that color varies evenly. This results in a functional and visually pleasing color wheel.
     </p>
     <p>
-      To calculate these new positions, I utilized Iapbp, a newer color system that offers slightly more accurate color difference calculations than Oklab. The positions were optimized using a constant saturation of 70% and a constant value of 100%, ensuring good perceptual uniformity across both high and low saturation levels.
+      To calculate these new positions, I opted to utilize <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-32-17-30742">Ia<sub>p</sub>b<sub>p</sub></a>, a color system that offers slightly more accurate color difference calculations than Oklab. The positions were optimized using a constant saturation of 70% and a constant value of 100%, ensuring good perceptual uniformity across both high and low saturation levels.
     </p>
 
 

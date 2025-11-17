@@ -265,6 +265,12 @@ function toImage(width, height) {
   // rescale
   colorWheelCanvas.style.width = 
       colorWheelCanvas.style.width = canvasSize + 'px';
+  const img = document.createElement('img');
+  img.src = colorWheelCanvas.toDataURL();
+  img.style.width = canvasSize + 'px';
+  img.alt = "color wheel";
+  colorWheelCanvas.replaceWith(img);
+
 }
 
 function createProgram(gl, vertexShader, fragmentShader) {
